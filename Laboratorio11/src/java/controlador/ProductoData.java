@@ -1,8 +1,6 @@
 package controlador;
 
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import libreria.Conexion;
 import modelo.Producto;
 
 @ManagedBean(name = "productoData", eager = true)
@@ -18,31 +17,21 @@ import modelo.Producto;
 public class ProductoData implements Serializable{
     
     private static final long serialVersionUID = 1L;
+    Conexion c = new Conexion();
     
-    public Connection getConnection () {
-        
-        Connection con = null;
-        
-        try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "jfabiant", "jfabiant");
-            System.out.println("Conexion establecida correctamente");
-            
-        }catch(ClassNotFoundException | SQLException e1){
-            System.out.println("Error al establecer la conexion: "+e1);
-        }
-        return con;
-    }
+    //
     
     public List<Producto> getProductos () {
         
         List<Producto> records = new ArrayList<>();
         
-        PreparedStatement sen;
-        ResultSet res;
-        String query = "SELECT PRO_CODIGO, PRO_NOMBRE, PRO_PRECIO, PRO_STOCK FROM PRODUCTO";
         try{
-            sen = getConnection().prepareStatement(query);
+            
+            PreparedStatement sen;
+            ResultSet res;
+            String sql = "SELECT PRO_CODIGO, PRO_NOMBRE, PRO_PRECIO, PRO_STOCK FROM PRODUCTO";
+        
+            sen = c.getConnection().prepareStatement(sql);
             res = sen.executeQuery();
             while (res.next()) {
                 Producto prod = new Producto();
@@ -53,6 +42,7 @@ public class ProductoData implements Serializable{
                 
                 records.add(prod);
             }
+            
         }catch(SQLException e2){
             e2.printStackTrace();
         }
@@ -60,4 +50,27 @@ public class ProductoData implements Serializable{
         return records;
     }
     
+    /*
+    public void registrarProducto() {
+        PreparedStatement sen;
+        String sql = "INSERT INTO PRODUCTO VALUES (?, ?, ?, ?, ?, ?)";
+        try{
+            
+            sen = c.getConnection().prepareStatement(sql);
+            
+            sen.setString(1, empresa);
+            sen.setInt(2, ruc);
+            
+            sen.executeUpdate();
+            
+        }catch(SQLException e3){
+            e3.printStackTrace();
+        }
+        
+        empresa = "";
+        ruc = 0;
+        
+    }
+    
+*/
 }

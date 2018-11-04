@@ -9,22 +9,20 @@
     </h:head>
     <h:body>
         <h2>Almacenes</h2>
-        <table class="tabla">
-            <h:dataTable value="#{almacenData.almacen}" var="item" styleClass="authorTable" headerClass="authorTableHeader" rowClasses="authorTableOddRow,authorTableEvenRow">
-                <h:column>
-                        <f:facet name="header">Codigo</f:facet>
-                        #{item.codigo}
-                </h:column>
-                <h:column>
-                        <f:facet name="header">Distrito</f:facet>
-                        #{item.distrito}
-                </h:column>
-                <h:column>
-                        <f:facet name="header">Responsable</f:facet>
-                        #{item.responsable}
-                </h:column>
-            </h:dataTable>
-        </table>
+        <h:dataTable value="#{almacenData.almacen}" var="item" styleClass="authorTable" headerClass="authorTableHeader" rowClasses="authorTableOddRow,authorTableEvenRow">
+            <h:column>
+                <f:facet name="header">Codigo</f:facet>
+                #{item.codigo}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Distrito</f:facet>
+                #{item.distrito}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Responsable</f:facet>
+                #{item.responsable}
+            </h:column>
+        </h:dataTable>
         <br/>
         <h:form>
             <h:commandButton value="Volver" action="index.xhtml"/> &nbsp;

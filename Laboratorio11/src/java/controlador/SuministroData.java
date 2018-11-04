@@ -1,8 +1,6 @@
 package controlador;
 
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import libreria.Conexion;
 import modelo.Suministro;
 
 @ManagedBean(name = "suministroData", eager = true)
@@ -18,20 +17,25 @@ import modelo.Suministro;
 public class SuministroData implements Serializable{
     
     private static final long serialVersionUID = 1L;
+    Conexion c = new Conexion();
     
-    public Connection getConnection () {
-        
-        Connection con = null;
-        
-        try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "jfabiant", "jfabiant");
-            System.out.println("Conexion establecida correctamente");
-            
-        }catch(ClassNotFoundException | SQLException e1){
-            System.out.println("Error al establecer la conexion: "+e1);
-        }
-        return con;
+    private String empresa;
+    private int ruc;
+
+    public String getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
+    }
+
+    public int getRuc() {
+        return ruc;
+    }
+
+    public void setRuc(int ruc) {
+        this.ruc = ruc;
     }
     
     public List<Suministro> getSuministros () {
@@ -39,10 +43,10 @@ public class SuministroData implements Serializable{
         
         PreparedStatement sen;
         ResultSet res;
-        String query = "SELECT SUM_CODIGO, SUM_EMPRESA, SUM_RUC FROM SUMINISTRO";
+        String sql = "SELECT SUM_CODIGO, SUM_EMPRESA, SUM_RUC FROM SUMINISTRO";
         
         try{
-            sen = getConnection().prepareStatement(query);
+            sen = c.getConnection().prepareStatement(sql);
             res = sen.executeQuery();
             while (res.next()) {
                 Suministro sum = new Suministro();
@@ -52,10 +56,32 @@ public class SuministroData implements Serializable{
                 
                 records.add(sum);
             }
+            
         }catch(SQLException e2){
             e2.printStackTrace();
         }
         return records;
+    }
+    
+    public void registrarSuministro() {
+        PreparedStatement sen;
+        String sql = "INSERT INTO SUMINISTRO VALUES (SUMINISTRO_SEQUENCE.NEXTVAL, ?, ?)";
+        try{
+            
+            sen = c.getConnection().prepareStatement(sql);
+            
+            sen.setString(1, empresa);
+            sen.setInt(2, ruc);
+            
+            sen.executeUpdate();
+            
+        }catch(SQLException e3){
+            e3.printStackTrace();
+        }
+        
+        empresa = "";
+        ruc = 0;
+        
     }
     
 }

@@ -6,11 +6,11 @@
         <title>Laboratorio 11</title>
     </h:head>
     <h:body>
-        <h2>Registro de un almacen</h2>
+        <h2>Registro de un producto</h2>
         <h:form>
             <h:panelGrid columns="2">
-                <h:outputLabel value="Distrito:"/>
-                <h:inputText value="#{almacenData.distrito}"/>
+                <h:outputLabel value="Codigo:"/>
+                <h:inputText value="#{productoData.codigo}"/>
                 <h:outputLabel value="Responsable:"/>
                 <h:inputText value="#{almacenData.responsable}"/>
                 <h:commandButton value="Aceptar" action="ListarAlmacen.xhtml" actionListener="#{almacenData.registrarAlmacen()}"/>
@@ -19,4 +19,3 @@
         </h:form>
     </h:body>
 </html>
-
