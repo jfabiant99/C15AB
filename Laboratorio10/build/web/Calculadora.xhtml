@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <br/>
+        <h:form>
+            <h3>CALCULADORA CON JSF</h3>
+            <h:inputText class="inputDatos" value="${appControlador.res}" />
+            <br/>
+            <h:commandButton value="1" action="${appControlador.procesar(1)}"/>
+            <h:commandButton value="2" action="${appControlador.procesar(2)}"/>
+            <h:commandButton value="3" action="${appControlador.procesar(3)}"/>
+            <h:commandButton value="+" action="${appControlador.operar('SUMAR')}"/>
+            <br/>
+            <h:commandButton value="4" action="${appControlador.procesar(4)}"/>
+            <h:commandButton value="5" action="${appControlador.procesar(5)}"/>
+            <h:commandButton value="6" action="${appControlador.procesar(6)}"/>
+            <h:commandButton value="-" action="${appControlador.operar('RESTAR')}"/>
+            <br/>
+            <h:commandButton value="7" action="${appControlador.procesar(7)}"/>
+            <h:commandButton value="8" action="${appControlador.procesar(8)}"/>
+            <h:commandButton value="9" action="${appControlador.procesar(9)}"/>
+            <h:commandButton value="x" action="${appControlador.operar('MULTIPLICAR')}"/>
+            <br/>
+            <h:commandButton value="0" action="${appControlador.procesar(0)}"/>
+            <input type="reset" value="c" />
+            <h:commandButton value="/" action="${appControlador.operar('DIVIDIR')}"/>
+            
+            <input type="button" value="="/>
+        </h:form>
+    </h:body>
+</html>
+
