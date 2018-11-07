@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Laboratorio 10</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+    </h:head>
+    <h:body>
+        
+        <div class="container">
+            <h2>Registro de productos</h2>
+        
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Ingresar el producto: "/>
+                    <h:selectOneMenu value="${appControlador2.producto}" class="form-control">
+                        <f:selectItem itemValue="TV" itemLabel="TV"/>
+                        <f:selectItem itemValue="Tablet" itemLabel="Tablet"/>
+                        <f:selectItem itemValue="Laptop" itemLabel="Laptop"/>
+                    </h:selectOneMenu>
+
+                    <h:outputLabel value="Ingrese el precio del producto:"/>
+                    <h:inputText value="${appControlador2.precio}" size="45" class="form-control"/>
+
+                    <h:outputLabel value="Ingrese la cantidad del producto:"/>
+                    <h:inputText value="${appControlador2.cantidad}" size="45" class="form-control"/>
+
+                    <h:commandButton value="Registrar producto" action="${appControlador2.proceso}" class="btn btn-success"/>
+                    <h:commandButton value="Limpiar" action="${appControlador2.limpiar}" class="btn btn-default"/>
+                </h:panelGrid>
+            </h:form>
+            <h2>Impresión de lo registrado</h2>
+
+            <h:panelGrid columns="2" class="table table-bordered">
+                <h:outputLabel value="Producto: " style="font-weight: bold;"/>
+                <h:outputText value="${appControlador2.producto}"/>
+                <h:outputLabel value="Precio: " style="font-weight: bold;"/>
+                <h:outputText value="${appControlador2.precio}"/>
+                <h:outputLabel value="Cantidad: " style="font-weight: bold;"/>
+                <h:outputText value="${appControlador2.cantidad}"/>
+                <h:outputLabel value="Subtotal: " style="font-weight: bold;"/>
+                <h:outputText value="${appControlador2.subtotal}"/>
+                <h:outputLabel value="IGV(18%) : " style="font-weight: bold;"/>
+                <h:outputText value="${appControlador2.igv}"/>
+                <h:outputLabel value="Total: " style="font-weight: bold;"/>
+                <h:outputText value="${appControlador2.total}"/>
+            </h:panelGrid>
+        </div>
+        
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </h:body>
+</html>
+
